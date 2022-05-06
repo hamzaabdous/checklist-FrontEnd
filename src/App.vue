@@ -85,7 +85,8 @@ export default {
       listDrawerRouter: [{ id: 1, name: "Gestion" }],
       listDrawerChildRouter: [
         { id: 1, name: "user", ROUTE: "/user" },
-        { id: 1, name: "Departement", ROUTE: "/Departement" },
+        { id: 2, name: "Departement", ROUTE: "/Departement" },
+        { id: 3, name: "Role", ROUTE: "/Role" },
       ],
       users: [],
       show: true,

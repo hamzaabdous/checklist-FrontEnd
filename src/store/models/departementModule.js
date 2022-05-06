@@ -27,7 +27,7 @@ const departementModule = {
         CustomizedAxios.get("departements/")
           .then((response) => {
             commit("SET_DEPARTEMENTS", response.data);
-            console.log("set user 1");
+            console.log("set department 1");
             resolve(response);
           })
           .catch((error) => {
