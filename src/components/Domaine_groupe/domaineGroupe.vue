@@ -2,16 +2,16 @@
   <div style="padding: 5px; padding-top: 8%">
     <v-data-table
       :headers="headers"
-      :items="users"
+      :items="domaineGroupes"
       sort-by="item.id"
       class="elevation-1"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>users</v-toolbar-title>
+          <v-toolbar-title>DOMAINEGROUPE</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="600px">
+          <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 color="#99A799"
@@ -33,38 +33,20 @@
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.username"
-                        label="username"
+                        v-model="editedItem.name"
+                        label="name"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.lastName"
-                        label="lastName"
+                        v-model="editedItem.departement"
+                        label="departement"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.firstName"
-                        label="firstName"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.email"
-                        label="email"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.update_date"
-                        label="update date"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.phone_number"
-                        label="phone number"
+                        v-model="editedItem.domaine.id"
+                        label="domaine"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -82,7 +64,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-dialog v-model="dialogDelete" max-width="600px">
             <v-card>
               <v-card-title class="text-h5"
                 >Are you sure you want to delete this item?</v-card-title
@@ -120,49 +102,33 @@ export default {
     dialogDelete: false,
     headers: [
       { text: "id", align: "start", value: "id", sortable: true },
-      { text: "lastName", value: "lastName", sortable: true },
-      { text: "firstName", value: "firstName", sortable: true },
-      { text: "email", value: "email", sortable: true },
-      { text: "role", value: "role.name", sortable: true },
-      { text: "phone Number", value: "phoneNumber", sortable: true },
-      { text: "created Date", value: "createdDate", sortable: true },
-
+      { text: "name", value: "name", sortable: true },
+      { text: "departement", value: "departement", sortable: true },
+      { text: "domaine", value: "domaine.name", sortable: true },
       { text: "Actions", value: "actions", sortable: false },
     ],
-    users: [],
+    domaineGroupes: [],
     isAdd: true,
     editedIndex: -1,
     editedItem: {
       id: "",
-      created_date: null,
-      email: "",
-      password: null,
-      phone_number: "",
-      update_date: null,
-      username: "",
-      role: {
-        id: 1,
+      name: "",
+      departement: "",
+      domaine: {
+        id: "",
       },
-      firstName: "",
-      lastName: "",
     },
     defaultItem: {
       id: "",
-      created_date: "",
-      email: "",
-      password: null,
-      phone_number: "",
-      update_date: "",
-      username: "",
-      role: {
-        id: 1,
+      name: "",
+      departement: "",
+      domaine: {
+        id: "",
       },
-      firstName: "",
-      lastName: "",
     },
   }),
   mounted() {
-    document.title = "user";
+    document.title = "domaineGroupes";
 
     this.initialize();
   },
@@ -170,7 +136,7 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
-    ...mapGetters(["getUsers"]),
+    ...mapGetters(["getdomaineGroupes"]),
   },
   watch: {
     dialog(val) {
@@ -185,20 +151,20 @@ export default {
   },
   methods: {
     initialize() {
-      this.setUsersAction().then(() => {
-        this.users = [...this.getUsers];
-        console.log(this.users);
+      this.setDOMAINEGROUPESAction().then(() => {
+        this.domaineGroupes = [...this.getdomaineGroupes];
+        console.log(this.domaineGroupes);
       });
     },
     ...mapActions([
-      "setUsersAction",
-      "editUserAction",
-      "deleteUserAction",
-      "addUserAction",
+      "setDOMAINEGROUPESAction",
+      "editDOMAINEGROUPEAction",
+      "deleteDOMAINEGROUPEAction",
+      "addDOMAINEGROUPEAction",
     ]),
 
     editItem(item) {
-      this.editedIndex = this.users.indexOf(item) + 1;
+      this.editedIndex = this.domaineGroupes.indexOf(item) + 1;
       this.editedItem = Object.assign({}, item);
       console.log("item :", item);
       this.dialog = true;
@@ -209,8 +175,8 @@ export default {
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.deleteUserAction(this.editedIndex).then(() => {
-        this.users = this.getUsers;
+      this.deleteDOMAINEGROUPEAction(this.editedIndex).then(() => {
+        this.domaineGroupes = this.getdomaineGroupes;
       });
       this.closeDelete();
     },
@@ -222,15 +188,15 @@ export default {
     },
     save(editedItem) {
       if (this.editedIndex == -1) {
-        console.log("add");
-        this.addUserAction(editedItem).then(() => {
-          this.users = [...this.getUsers];
+        console.log("add", editedItem);
+        this.addDOMAINEGROUPEAction(editedItem).then(() => {
+          this.domaineGroupes = [...this.domaineGroupes];
         });
       } else {
         console.log("edite");
 
-        this.editUserAction(editedItem).then(() => {
-          this.users = this.getUsers;
+        this.editDOMAINEGROUPEAction(editedItem).then(() => {
+          this.domaineGroupes = this.getdomaineGroupes;
         });
       }
 

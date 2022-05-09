@@ -87,6 +87,8 @@ export default {
         { id: 1, name: "user", ROUTE: "/user" },
         { id: 2, name: "Departement", ROUTE: "/Departement" },
         { id: 3, name: "Role", ROUTE: "/Role" },
+        { id: 4, name: "domaineGroupe", ROUTE: "/domaineGroupe" },
+        { id: 5, name: "damageType", ROUTE: "/damageType" },
       ],
       users: [],
       show: true,

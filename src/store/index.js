@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import usersModule from "./models/userModule";
 import departementModule from "./models/departementModule";
 import rolesModule from "./models/roleModule";
+import domaineGroupeModule from "./models/domaineGroupeModule";
+import damageTypeModule from "./models/damageTypeModule";
 Vue.use(Vuex);
 
 let store = null;
@@ -12,6 +14,8 @@ export default function () {
       usersModule,
       departementModule,
       rolesModule,
+      domaineGroupeModule,
+      damageTypeModule,
     },
     state: {},
     mutations: {},
