@@ -5,6 +5,7 @@ import departments from "../components/Department/departments.vue";
 import roles from "../components/Role/roles.vue";
 import domaineGroupe from "../components/Domaine_groupe/domaineGroupe.vue";
 import damageType from "../components/damage_Type/damageType.vue";
+import damage from "../components/damage/damage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -48,6 +49,15 @@ const routes = [
     path: "/damageType",
     name: "damageType",
     component: damageType,
+
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+  },
+  {
+    path: "/damage",
+    name: "damage",
+    component: damage,
 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
